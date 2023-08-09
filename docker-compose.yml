@@ -1,0 +1,34 @@
+version: "3"
+services:
+  react-app:
+    image: react-app
+    build: ./todolist
+    stdin_open: true
+    ports:
+      - "5713:5173"
+    networks:
+      - mern-app
+  api-server:
+    image: api-server
+    build: ./server
+    ports:
+      - "3001:3001"
+    networks:
+      - mern-app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.4-bionic
+    ports:
+      - "27107:27017"
+    networks:
+      - mern-app
+    volumes:
+      - mongo-data:/data/db
+networks:
+  mern-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
+  
