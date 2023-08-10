@@ -5,7 +5,7 @@ services:
     build: ./todolist
     stdin_open: true
     ports:
-      - "5713:5173"
+      - "3000:3000"
     networks:
       - mern-app
   api-server:
